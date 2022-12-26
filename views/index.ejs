@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <meta name="csrf-token" content="<%= csrfToken %>">
         <link href="./css/style.css" rel="stylesheet">
-        <title>Likitha's Todo Manager</title>
+        <title>Likitha Todo Manager</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="./css/style.css" rel="stylesheet">
         <script>
@@ -68,7 +68,10 @@
             </div>  
             </div>
         </form>
-        <%- include('todos.ejs') %>
+        <%- include('todos.ejs', {title: "Overdue", data: overdue}) %>
+        <%- include('todos.ejs', {title: "Due Today", data: dueToday}) %>
+        <%- include('todos.ejs', {title: "Due Later", data: dueLater}) %>
+        <%- include('todos.ejs', {title: "Completed Items", data: completedItems}) %>
     </div>
 </div>
     </body>
