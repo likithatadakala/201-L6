@@ -45,12 +45,23 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
 
-    static addTodo({ title, dueDate }) {
-      return this.create({ title: title, dueDate: dueDate, completed: false });
+     static completedItems() {
+      return this.findAll({
+        where: {
+          completed: true,
+        },
+        order: [["id", "ASC"]],
+      });
     }
-
-    markAsCompleted() {
-      return this.update({ completed: true });
+    static async remove(id) {
+      return this.destroy({
+        where: {
+          id,
+        },
+      });
+    }
+    setCompletionStatus(bool) {
+      return this.update({ completed: bool });
     }
   }
   Todo.init(
