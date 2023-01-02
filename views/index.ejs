@@ -46,39 +46,33 @@
             window.location.reload();
           }
          })
-         .catch((err) => console.error(err));
+         .catch((err) => console.erroe(err));
       }
         </script>
     </head>
-<body>
-
-
-    <div class="grid grid-cols-6">
+    <body>
+       <div class= "grid  grid-cols-6">
         <div class="col-start-3 col-span-2">
-            <%- include('header.ejs') %>
-                <form method="post" action="/todos">
-                    <div class="flex gap-2 py-4">
-                        <div class="flex-auto">
-                            <input type="text" placeholder="Enter task" name="title"
-                                class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm" required />
-                        </div>
-                        <div class="flex-auto">
-                            <input type="date" name="dueDate"
-                                class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm leading-4"
-                                required>
-                        </div>
-                        <div class="flex-none">
-                            <button type="submit"
-                                class="bg-green-600 text-white px-5 py-1.5 rounded mr-2 mb hover:bg-blue-600">
-                                Add</button>
-                        </div>
-                    </div>
-                </form>
-                <div>
-                    <%- include('todos.ejs') %>
+        <%- include("header.ejs") %> 
+        <form action="/todos" method="post">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <div class="flex gap-2 py-4">
+                <div class="flex-auto">
+                    <input type="text" name="title" placeholder="what's next" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm" required />
                 </div>
-        </div>
+            <div class="flex-auto">
+                <input type="date" name="dueDate" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm leading-4 " />
+            </div>
+            <div class="flex-none">
+                <button type="submit" class="bg-green-600 text-white px-5 py-1.5 rounded font-medium mr-2 mb-2">Add</button>
+            </div>  
+            </div>
+        </form>
+        <%- include('todos.ejs', {title: "Overdue", data: overdue}) %>
+        <%- include('todos.ejs', {title: "Due Today", data: dueToday}) %>
+        <%- include('todos.ejs', {title: "Due Later", data: dueLater}) %>
+        <%- include('todos.ejs', {title: "Completed Items", data: completedItems}) %>
     </div>
-</body>
-
+</div>
+    </body>
 </html>
